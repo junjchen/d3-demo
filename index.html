@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="css/chart.css" media="screen" type="text/css" />
+    <title>PV图表</title>
+    <script type="text/javascript" src="http://libs.baidu.com/jquery/2.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="http://apps.bdimg.com/libs/d3/3.4.8/d3.js"></script>
+    <script type="text/javascript" src="js/diagrams.js"></script>
+    <script type="text/javascript">
+        $(document).ready(function() {
+            $("#post_button").click(function() {
+
+                $.ajax({
+                    type: "POST",
+                    url: "http://45.78.5.243:10080/post",
+                    data: $("#query_form").serialize(),
+                    datatype: "json",
+                    beforeSend: function() {},
+                    success: function() {
+                        alert($("#query_form").serialize())
+                        draw_pv_diagram("http://45.78.5.243:10080/")
+                    },
+                    complete: function() {},
+                    error: function() {}
+                });
+            });
+        });
+
+    </script>
+</head>
+
+<body>
+    <div>
+        <form id="query_form">
+            <select name="query_type">
+                <option value="pv">pv</option>
+                <option value="uv">uv</option>
+            </select>
+            <p>
+                日期:
+                <input type="date" name="date" />
+            </p>
+            <p>
+                酒店:
+                <input type="text" name="hotel" />
+            </p>
+            <p>
+                电视型号:
+                <input type="text" name="TV_type" />
+            </p>
+            <input type="button" id="post_button" value="提交" />
+        </form>
+    </div>
+</body>
+
+</html>
